@@ -10,6 +10,9 @@ import 'leaflet-defaulticon-compatibility';
 
 import RoutingMachine from './RoutingMachine';
 
+// Add markers on the map by entering a location.
+// Calculate and display a route between two locations via a toggleable form.
+
 function App() {
   const [locationMarkers, setLocationMarkers] = useState([]);
   const [waypoints, setWaypoints] = useState();
