@@ -299,7 +299,6 @@ Markus's Zone
   top: 2vh;
   z-index: 500;
   padding: 0.3vw;
-  padding-top: 2vh;
   font-size: 2rem;
   border: 2px solid rgb(41, 38, 38);
   background-color: #282c34;
@@ -355,9 +354,22 @@ Markus's Zone
 }
 
 .checkbox {
-  transform: scale(2.3);
+  height: 3vh;
+  width: 3vw;
   margin-right: 1vw;
   margin-left: 1vw
+}
+#box1 {
+  margin-top: 2vh;
+}
+#box2 {
+  margin-top: 1vh;
+}
+#box3 {
+  margin-top: 3vh;
+}
+#box4 {
+  margin-top: 1.2vh;
 }
 .popup .show {
   visibility: visible;
