@@ -295,10 +295,11 @@ Markus's Zone
 }
 #menuBlock {
   position: absolute;
-  right: 0.5vw;
+  left: 3vw;
   top: 2vh;
   z-index: 500;
-  padding: 10px;
+  padding: 0.3vw;
+  padding-top: 2vh;
   font-size: 2rem;
   border: 2px solid rgb(41, 38, 38);
   background-color: #282c34;
@@ -354,7 +355,9 @@ Markus's Zone
 }
 
 .checkbox {
-  transform: scale(2);
+  transform: scale(2.3);
+  margin-right: 1vw;
+  margin-left: 1vw
 }
 .popup .show {
   visibility: visible;
