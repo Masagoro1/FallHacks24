@@ -54,20 +54,23 @@ function App() {
 
     const formData = new FormData(event.target);
     const locations = formData.getAll('location');
+    const reduceTime = formData.get('reduceTime') === 'on';
     const res = await fetch('/api/route', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json;charset=UTF-8',
       },
-      body: JSON.stringify({ locations }),
+      body: JSON.stringify({ locations, reduceTime }),
     });
+
     if (!res.ok) {
       const err = await res.text();
       alert(`Something went wrong.\n${err}`);
     } else {
       const data = await res.json();
       setWaypoints(data.waypoints);
+      console.log('Route time:', data.routeTime);
     }
   }
 
