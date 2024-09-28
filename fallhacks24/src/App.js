@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faRoute, faHamburger } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faRoute, faBars } from '@fortawesome/free-solid-svg-icons';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
@@ -92,19 +92,20 @@ function App() {
         <div id="chooseOptions">
         {showMenu && (
             <div class="Menu">
-              
-                <button class="menuButt">Speed of Light</button>
+                <button class="button-85" role="button">Go Light Speed</button>
                 <input class="checkbox" type="checkbox"></input>
-                <button class="menuButt">cuh</button>
+                <button class="button-49" role="button">Run red lights</button>
                 <input class="checkbox" type="checkbox"></input>
-                <button class="menuButt">cuh</button>
+                <button class="button-49" role="button">Run through walls</button>
+                <input class="checkbox" type="checkbox"></input>
+                <button class="button-49" role="button">Speeding</button>
                 <input class="checkbox" type="checkbox"></input>
               
               
             </div>
           )}
           <FontAwesomeIcon
-            icon={faHamburger}
+            icon={faBars}
             style={{ color: '#1EE2C7' }}
             onClick={() => {
               setMenu((showMenu) => !showMenu);
