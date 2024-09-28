@@ -15,5 +15,5 @@ Then to run the website, run these commands in command prompt:
 `cd fallhacks24`
 
 seperate terminal:
-###`cd fallhacks24/server`
+`cd fallhacks24/server`
 `npm start`
