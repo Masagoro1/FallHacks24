@@ -3,6 +3,7 @@ import { createControlComponent } from '@react-leaflet/core';
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
+// creates and displays the route
 const createRoutineMachineLayer = ({ waypoints }) => {
   const instance = L.Routing.control({
     waypoints: waypoints.map(({ latitude, longitude }) =>
