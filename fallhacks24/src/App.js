@@ -10,6 +10,29 @@ import 'leaflet-defaulticon-compatibility';
 
 import RoutingMachine from './RoutingMachine';
 
+//Menu inputs
+let isLightSpeed = false;
+let isRunningReds = false;
+let isSpeeding = false;
+let isGoingThroughBuildings = false;
+
+function LightSpeedButtonPressed(){
+  isLightSpeed = !isLightSpeed;
+
+}
+function RunningRedsButtonPressed(){
+  isRunningReds = !isRunningReds;
+  
+}
+function SpeedingButtonPressed(){
+  isSpeeding = !isSpeeding;
+
+}
+function isGoingThroughBuildingsButtonPressed(){
+  isGoingThroughBuildings = !isGoingThroughBuildings;
+
+}
+
 // Add markers on the map by entering a location.
 // Calculate and display a route between two locations via a toggleable form.
 
