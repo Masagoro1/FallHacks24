@@ -70,6 +70,9 @@ function App() {
 
   return (
     <div className="App">
+      <div id="titleLight">
+        Maps: Faster than Light Edition
+      </div>
       <form className="inputBlock" onSubmit={handleMarkerSubmit}>
         <input
           type="text"

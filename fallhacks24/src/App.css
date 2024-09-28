@@ -108,3 +108,19 @@
 .routeBlock input {
   font-size: 1rem;
 }
+
+/*
+Markus's Zone
+*/
+#titleLight {
+  position: absolute;
+  font-family: fantasy;
+  font-style: italic;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  padding: 5px;
+  font-size: 2rem;
+  border: 2px solid rgb(98, 190, 240);
+  background-color: rgb(98, 190, 240);
+}
