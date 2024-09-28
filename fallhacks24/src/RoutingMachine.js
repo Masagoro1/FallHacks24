@@ -9,16 +9,9 @@ const createRoutineMachineLayer = ({ waypoints }) => {
     waypoints: waypoints.map(({ latitude, longitude }) =>
       L.latLng(latitude, longitude)
     ),
-    
     draggableWaypoints: false,
-    
-  }).on('routesfound', function(e) {
-    var routes = e.routes;
-    var summary = routes[0].summary; // Get the summary of the first route
-    var totalTime = summary.totalTime; // Access the total time
-    console.log('Total time: ' + totalTime + ' seconds');
-});
-  
+  });
+
   return instance;
 };
 

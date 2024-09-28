@@ -24,7 +24,6 @@ async function geocodeLocation(loc) {
   return data;
 }
 
-// converts an address to geocode coordinates
 app.get('/api/geocode', async (req, res) => {
   try {
     const location = req.query.location;
@@ -35,11 +34,9 @@ app.get('/api/geocode', async (req, res) => {
   }
 });
 
-// returns the waypoints between the two locations
 app.post('/api/route', async (req, res) => {
   try {
     const locations = req.body.locations;
-
     if (locations.length !== 2) {
       res.status(422).json({ error: 'Expected 2 waypoints' });
       return;
