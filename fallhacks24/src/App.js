@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faRoute } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faRoute, faHamburger } from '@fortawesome/free-solid-svg-icons';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
@@ -40,7 +40,7 @@ function App() {
   const [locationMarkers, setLocationMarkers] = useState([]);
   const [waypoints, setWaypoints] = useState();
   const [showRoutingForm, setFormView] = useState(false);
-
+  const [showMenu, setMenu] = useState(false);
   useEffect(() => {}, [waypoints]);
 
   async function handleMarkerSubmit(event) {
@@ -77,25 +77,31 @@ function App() {
 
     const formData = new FormData(event.target);
     const locations = formData.getAll('location');
+    const reduceTime = formData.get('reduceTime') === 'on';
     const res = await fetch('/api/route', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json;charset=UTF-8',
       },
-      body: JSON.stringify({ locations }),
+      body: JSON.stringify({ locations, reduceTime }),
     });
+
     if (!res.ok) {
       const err = await res.text();
       alert(`Something went wrong.\n${err}`);
     } else {
       const data = await res.json();
       setWaypoints(data.waypoints);
+      console.log('Route time:', data.routeTime);
     }
   }
 
   return (
     <div className="App">
+      <div id="titleLight">
+        Maps: Faster than Light Edition
+      </div>
       <form className="inputBlock" onSubmit={handleMarkerSubmit}>
         <input
           type="text"
@@ -108,6 +114,30 @@ function App() {
           <FontAwesomeIcon icon={faLocationDot} style={{ color: '#1EE2C7' }} />
         </button>
       </form>
+      <div id="menuBlock">
+        <div id="chooseOptions">
+        {showMenu && (
+            <div class="Menu">
+              
+                <button class="menuButt">Speed of Light</button>
+                <input class="checkbox" type="checkbox"></input>
+                <button class="menuButt">cuh</button>
+                <input class="checkbox" type="checkbox"></input>
+                <button class="menuButt">cuh</button>
+                <input class="checkbox" type="checkbox"></input>
+              
+              
+            </div>
+          )}
+          <FontAwesomeIcon
+            icon={faHamburger}
+            style={{ color: '#1EE2C7' }}
+            onClick={() => {
+              setMenu((showMenu) => !showMenu);
+            }}
+          />
+        </div>
+      </div>
       <div className="routeBlock">
         <div className="addRoutes">
           {showRoutingForm && (
