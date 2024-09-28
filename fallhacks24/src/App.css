@@ -124,6 +124,20 @@ Markus's Zone
   border: 2px solid rgb(98, 190, 240);
   background-color: rgb(98, 190, 240);
 }
+#menuBlock {
+  position: absolute;
+  right: 0.5vw;
+  top: 2vh;
+  z-index: 500;
+  padding: 25px;
+  font-size: 2rem;
+  border: 2px solid rgb(41, 38, 38);
+  background-color: #282c34;
+}
+
+.menuButt{
+  font-size: 25px;
+}
 /*
 .popup {
   position: relative;
@@ -161,11 +175,16 @@ Markus's Zone
 
 .Menu{
   visibility: visible;
-  text-align: center;
   display: grid;
+  align-items: left;
   grid-template-columns: auto auto;
-  margin-left: 40%;
+  margin-left: 15%;
   margin-right: 40%;
+  grid-column-gap: 10px;
+}
+
+.checkbox {
+  transform: scale(2);
 }
 .popup .show {
   visibility: visible;
