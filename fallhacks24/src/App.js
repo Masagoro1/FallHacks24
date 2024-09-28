@@ -116,13 +116,16 @@ function App() {
         {showMenu && (
             <div class="Menu">
                 <button class="button-85" role="button">Go Light Speed</button>
-                <input class="checkbox" type="checkbox"></input>
+                <input class="checkbox" id="box1" type="checkbox"></input>
+
                 <button class="button-49" role="button">Run red lights</button>
-                <input class="checkbox" type="checkbox"></input>
+                <input class="checkbox" id="box2" type="checkbox"></input>
+
                 <button class="button-49" role="button">Run through walls</button>
-                <input class="checkbox" type="checkbox"></input>
+                <input class="checkbox" id="box3" type="checkbox"></input>
+
                 <button class="button-49" role="button">Speeding</button>
-                <input class="checkbox" type="checkbox"></input>
+                <input class="checkbox" id="box4" type="checkbox"></input>
               
               
             </div>
