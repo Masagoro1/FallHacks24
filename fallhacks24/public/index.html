@@ -48,5 +48,38 @@
     var popup = document.getElementById("myPopup");
     popup.classList.toggle("show");
   }
+  function extractTime(inputString) {
+    // Define regular expressions to match hours, minutes, and seconds
+    let hourRegex = /(\d+\.?\d*)\s*h/;    // Matches hours
+    let minRegex = /(\d+\.?\d*)\s*min/;   // Matches minutes
+    let secRegex = /(\d+\.?\d*)\s*s/;     // Matches seconds
+    
+    // Check for hours, minutes, and seconds using match
+    let hours = inputString.match(hourRegex);
+    let minutes = inputString.match(minRegex);
+    let seconds = inputString.match(secRegex);
+
+    // Convert and return the found values
+    let totalHours = 0;
+
+    if (hours) {
+        totalHours += parseFloat(hours[1]); // Add hours as is
+    }
+
+    if (minutes) {
+        totalHours += parseFloat(minutes[1]) / 60; // Convert minutes to hours
+    }
+
+    if (seconds) {
+        totalHours += parseFloat(seconds[1]) / 3600; // Convert seconds to hours
+    }
+    totalHours *= 60;
+    return totalHours;
+}
+  function GetTime(){
+  let output = document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent;
+  let time = extractTime(output);
+  return time;
+  }
   </script>
 </html>
