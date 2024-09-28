@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const { SuperfaceClient } = require('@superfaceai/one-sdk');
 const sdk = new SuperfaceClient();
-const PORT = 5000;
+const PORT = 3000;
 app.use(express.json());
 
 async function geocodeLocation(loc) {
