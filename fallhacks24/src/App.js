@@ -10,33 +10,77 @@ import 'leaflet-defaulticon-compatibility';
 
 import RoutingMachine from './RoutingMachine';
 
+
+
 //Menu inputs
 let isLightSpeed = false;
 let isRunningReds = false;
 let isSpeeding = false;
 let isGoingThroughBuildings = false;
 
-function LightSpeedButtonPressed(){
-  isLightSpeed = !isLightSpeed;
 
-}
-function RunningRedsButtonPressed(){
-  isRunningReds = !isRunningReds;
+function modifyTime(inputString, percentage) {
+  // Regular expressions to find the number followed by 'h' (hours) or 'min' (minutes)
+  let hourRegex = /(\d+\.?\d*)\s*h/;
+  let minRegex = /(\d+\.?\d*)\s*min/;
   
-}
-function SpeedingButtonPressed(){
-  isSpeeding = !isSpeeding;
+  // Check if the string contains hours
+  if (hourRegex.test(inputString, percentage)) {
+      let match = inputString.match(hourRegex);
+      let originalHours = parseFloat(match[1]);
+      let modifiedHours = originalHours * percentage;
 
-}
-function isGoingThroughBuildingsButtonPressed(){
-  isGoingThroughBuildings = !isGoingThroughBuildings;
+      // Replace the original hours with the modified hours
+      return inputString.replace(hourRegex, `${modifiedHours.toFixed(1)} h`);
+  }
+  // Check if the string contains minutes
+  else if (minRegex.test(inputString)) {
+      let match = inputString.match(minRegex);
+      let originalMinutes = parseFloat(match[1]);
+      let modifiedMinutes = originalMinutes * 0.8;
 
+      // Replace the original minutes with the modified minutes
+      return inputString.replace(minRegex, `${modifiedMinutes.toFixed(1)} min`);
+  }
+
+  // If no 'h' or 'min' is found, return the original string
+  return inputString;
 }
 
 // Add markers on the map by entering a location.
 // Calculate and display a route between two locations via a toggleable form.
 
 function App() {
+  async function SpeedingButtonPressed() {
+    let output = document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent;
+    document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.95);
+  }
+  async function RunRedsPressed() {
+    if(isRunningReds){
+      return;
+    }
+    let output = document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent;
+    document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.85);
+    isRunningReds = true;
+  }
+  async function GoThroughBuildingsPressed() {
+    if(isGoingThroughBuildings){
+      return;
+    }
+    let output = document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent;
+    document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.85);
+    isGoingThroughBuildings = true;
+  }
+
+  async function LightSpeed(){
+    if(isLightSpeed){
+      return;
+    }
+    let output = document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent;
+    document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.001);
+    isLightSpeed = true;
+  }
+
   const [locationMarkers, setLocationMarkers] = useState([]);
   const [waypoints, setWaypoints] = useState();
   const [showRoutingForm, setFormView] = useState(false);
@@ -115,17 +159,14 @@ function App() {
         <div id="chooseOptions">
         {showMenu && (
             <div class="Menu">
-                <button class="button-85" role="button">Go Light Speed</button>
-                <input class="checkbox" id="box1" type="checkbox"></input>
-
-                <button class="button-49" role="button">Run red lights</button>
-                <input class="checkbox" id="box2" type="checkbox"></input>
-
-                <button class="button-49" role="button">Run through walls</button>
-                <input class="checkbox" id="box3" type="checkbox"></input>
-
-                <button class="button-49" role="button">Speeding</button>
-                <input class="checkbox" id="box4" type="checkbox"></input>
+              <button class="button-85" role="button" onClick={LightSpeed}>Go Light Speed</button>
+              <input class="checkbox" type="checkbox"></input>
+              <button class="button-49" role="button" onClick={RunRedsPressed}>Run red lights</button>
+              <input class="checkbox" type="checkbox"></input>
+              <button class="button-49" role="button" onClick={GoThroughBuildingsPressed}>Run through walls</button>
+              <input class="checkbox" type="checkbox"></input>
+              <button class="button-49" role="button" onClick={SpeedingButtonPressed}>Speeding</button>
+              <input class="checkbox" type="checkbox"></input>
               
               
             </div>
