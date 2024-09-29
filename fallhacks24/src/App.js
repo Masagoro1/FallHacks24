@@ -36,7 +36,7 @@ function modifyTime(inputString, percentage) {
   else if (minRegex.test(inputString)) {
       let match = inputString.match(minRegex);
       let originalMinutes = parseFloat(match[1]);
-      let modifiedMinutes = originalMinutes * 0.8;
+      let modifiedMinutes = originalMinutes * percentage;
 
       // Replace the original minutes with the modified minutes
       return inputString.replace(minRegex, `${modifiedMinutes.toFixed(1)} min`);
@@ -90,7 +90,7 @@ function App() {
       setLight.checked = true;
     }
     let output = document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent;
-    document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.01);
+    document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.001);
     isLightSpeed = true;
   }
 
