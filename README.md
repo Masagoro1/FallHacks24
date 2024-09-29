@@ -18,3 +18,5 @@ seperate terminal:
 `cd fallhacks24/server`
 and then
 `npm start`
+
+It takes three attemps to get the path in case of an error
