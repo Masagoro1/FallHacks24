@@ -15,7 +15,6 @@ import RoutingMachine from './RoutingMachine';
 //Menu inputs
 let isLightSpeed = false;
 let isRunningReds = false;
-let isSpeeding = false;
 let isGoingThroughBuildings = false;
 
 
@@ -56,16 +55,26 @@ function App() {
     document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.95);
   }
   async function RunRedsPressed() {
+    
     if(isRunningReds){
       return;
+    }
+    const setRunRed = document.getElementById("rr");
+    if(!setRunRed.checked) {
+      setRunRed.checked = true;
     }
     let output = document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent;
     document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.85);
     isRunningReds = true;
   }
   async function GoThroughBuildingsPressed() {
+    
     if(isGoingThroughBuildings){
       return;
+    }
+    const setRunWall = document.getElementById("rw");
+    if(!setRunWall.checked) {
+      setRunWall.checked = true;
     }
     let output = document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent;
     document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.85);
@@ -76,8 +85,12 @@ function App() {
     if(isLightSpeed){
       return;
     }
+    const setLight = document.getElementById("bl");
+    if(!setLight.checked) {
+      setLight.checked = true;
+    }
     let output = document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent;
-    document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.001);
+    document.getElementById("mapId").getElementsByClassName("leaflet-control-container")[0].getElementsByClassName("leaflet-top leaflet-right")[0].getElementsByClassName("leaflet-routing-container leaflet-bar leaflet-control")[0].getElementsByClassName("leaflet-routing-alternatives-container")[0].getElementsByClassName("leaflet-routing-alt ")[0].querySelector('h3').textContent = modifyTime(output, 0.01);
     isLightSpeed = true;
   }
 
@@ -85,6 +98,9 @@ function App() {
   const [waypoints, setWaypoints] = useState();
   const [showRoutingForm, setFormView] = useState(false);
   const [showMenu, setMenu] = useState(false);
+  const [boxLight, setLight] = useState(0);
+  const [boxRunRed, setRunRed] = useState(0);
+  const [boxRunWall, setRunWall] = useState(0);
   useEffect(() => {}, [waypoints]);
 
   async function handleMarkerSubmit(event) {
@@ -115,6 +131,7 @@ function App() {
     // Reset previous waypoints
     if (waypoints) {
       setWaypoints();
+
     }
     // Hide the form
     setFormView(false);
@@ -160,13 +177,13 @@ function App() {
         {showMenu && (
             <div class="Menu">
               <button class="button-85" role="button" onClick={LightSpeed}>Go Light Speed</button>
-              <input class="checkbox" type="checkbox"></input>
+              <input id ="bl" class="checkbox" type="checkbox"></input>
               <button class="button-49" role="button" onClick={RunRedsPressed}>Run red lights</button>
-              <input class="checkbox" type="checkbox"></input>
+              <input id ="rr" class="checkbox" type="checkbox"></input>
               <button class="button-49" role="button" onClick={GoThroughBuildingsPressed}>Run through walls</button>
-              <input class="checkbox" type="checkbox"></input>
-              <button class="button-49" role="button" onClick={SpeedingButtonPressed}>Speeding</button>
-              <input class="checkbox" type="checkbox"></input>
+              <input id ="rw" class="checkbox" type="checkbox"></input>
+              <button class="button-49" role="button" onClick={SpeedingButtonPressed}>Speed 10km/hr faster</button>
+
               
               
             </div>
@@ -176,6 +193,9 @@ function App() {
             style={{ color: '#1EE2C7' }}
             onClick={() => {
               setMenu((showMenu) => !showMenu);
+              isLightSpeed = false;
+              isRunningReds = false;
+              isGoingThroughBuildings = false;
             }}
           />
         </div>
